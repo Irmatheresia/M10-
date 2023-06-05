@@ -15,7 +15,9 @@ class _RingtoneListState extends State<RingtoneList> {
     'Luna',
     'Oberon',
     'Phobos',
-    'Dione'
+    'Dione',
+    'Sakura',
+    'Sneakers',
   ];
 
   String? selectedOption;
@@ -141,23 +143,26 @@ class _RingtoneListState extends State<RingtoneList> {
   showAlertDialog(BuildContext context) {
     return AlertDialog(
       title: const Text('Phone Ringtone'),
-      content: SizedBox(
-        width: double.maxFinite,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: options.length,
-          itemBuilder: (BuildContext context, int index) {
-            return RadioListTile<String?>(
-              title: Text(options[index]),
-              value: options[index],
-              groupValue: selectedOption,
-              onChanged: (String? value) {
-                setState(() {
-                  selectedOption = value!;
-                });
-              },
-            );
-          },
+      content: SingleChildScrollView(
+        child: Container(
+          width: 30,
+          height: 340,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: options.length,
+            itemBuilder: (BuildContext context, int index) {
+              return RadioListTile<String?>(
+                title: Text(options[index]),
+                value: options[index],
+                groupValue: selectedOption,
+                onChanged: (String? value) {
+                  setState(() {
+                    selectedOption = value!;
+                  });
+                },
+              );
+            },
+          ),
         ),
       ),
       actions: [
@@ -165,13 +170,14 @@ class _RingtoneListState extends State<RingtoneList> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Cancle'),
+          child: const Text('Cancel'),
         ),
         TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('Accept')),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Accept'),
+        ),
       ],
     );
   }
